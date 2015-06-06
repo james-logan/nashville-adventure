@@ -41,8 +41,15 @@ $.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
               });
               marker.dataWeNeed = entry;
               google.maps.event.addListener(marker, 'mouseover', function() {
+                infowindow.setContent((marker.dataWeNeed.description && marker.dataWeNeed.description.length > 50 ? marker.dataWeNeed.description.slice(0, 50) + "..." : marker.dataWeNeed.description) || "no description found");
+                infowindow.open(map,marker);
+              });
+              google.maps.event.addListener(marker, 'click', function() {
                 infowindow.setContent(marker.dataWeNeed.description || "no description found");
                 infowindow.open(map,marker);
+              });
+              google.maps.event.addListener(marker, 'dblclick', function() {
+                console.log('double-click');
               });
           });
 });
@@ -59,8 +66,15 @@ $.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
             });
             marker.dataWeNeed = entry;
             google.maps.event.addListener(marker, 'mouseover', function() {
+              infowindow.setContent((marker.dataWeNeed.marker_text && marker.dataWeNeed.marker_text.length > 50 ? marker.dataWeNeed.marker_text.slice(0, 50) + "..." : marker.dataWeNeed.marker_text) || "no description found");
+              infowindow.open(map,marker);
+            });
+            google.maps.event.addListener(marker, 'click', function() {
               infowindow.setContent(marker.dataWeNeed.marker_text || "no description found");
               infowindow.open(map,marker);
+            });
+            google.maps.event.addListener(marker, 'dblclick', function() {
+              console.log('double-click');
             });
         });
 });
