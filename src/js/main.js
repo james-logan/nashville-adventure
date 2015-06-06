@@ -1,3 +1,4 @@
+
 // these need to be put into the API queries to identify the desired datasets.
 var artResourceName = "xakp-ess3";
 var histResourceName = "vk65-u7my";
@@ -31,9 +32,9 @@ $.get(`${apiUrl}${beerResourceName}.json?${appToken}`, function(data) {
 
 var trailArray = [];
 
-window.onload(function () {
+window.onload = function () {
      getTrails();
-})
+}
 
 
 function getTrails () {
@@ -51,3 +52,24 @@ function postTrail () {
           $('trail-name-div').text(trailArray[0]);
      });
 }
+
+// Initialize Map Object and append to map-canvas
+function initialize () {
+var mapOptions = {
+  center: new google.maps.LatLng(36.1565338, -86.7769905),
+  zoom: 15
+};
+var map = new google.maps.Map(document.getElementById("map-canvas"),
+    mapOptions);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize)
+
+
+
+
+
+
+
+
+
