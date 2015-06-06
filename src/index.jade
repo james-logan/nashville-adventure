@@ -26,11 +26,15 @@ html(lang="en-US")
               a(href='#about') history
             li
               a(href='#contact') beer
+          ul.nav.navbar-nav.navbar-right
+            li
+              a.loginButton(href='#login') Log In
     // Begin page content
-    .container
+    .container-fluid
       .map
+      .crawls
     footer.footer
       .container
-        p.text-muted A Code for Nashville project.
+        p.text-muted A Code for Nashville shindig.
     script(src="lib/build.js")
     script(src="js/main.js")
