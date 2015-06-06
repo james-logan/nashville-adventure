@@ -23,7 +23,7 @@ var mapOptions = {
 }
 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-var contentString = "<p>info window</p>"
+var contentString = "<div class='info-window'><p>info window</p></div>"
 
 var infowindow = new google.maps.InfoWindow({
     content: contentString
@@ -41,11 +41,13 @@ $.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
               });
               marker.dataWeNeed = entry;
               google.maps.event.addListener(marker, 'mouseover', function() {
+                console.log(marker);
                 infowindow.setContent((marker.dataWeNeed.description && marker.dataWeNeed.description.length > 50 ? marker.dataWeNeed.description.slice(0, 50) + "..." : marker.dataWeNeed.description) || "no description found");
                 infowindow.open(map,marker);
               });
               google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(marker.dataWeNeed.description || "no description found");
+                console.log(marker);
+                infowindow.setContent((marker.dataWeNeed.description || "no description found") + "<br><br>" + (marker.dataWeNeed.location || "no location found"));
                 infowindow.open(map,marker);
               });
               google.maps.event.addListener(marker, 'dblclick', function() {
@@ -70,7 +72,7 @@ $.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
               infowindow.open(map,marker);
             });
             google.maps.event.addListener(marker, 'click', function() {
-              infowindow.setContent(marker.dataWeNeed.marker_text || "no description found");
+                infowindow.setContent((marker.dataWeNeed.marker_text || "no description found") + "<br><br>" + (marker.dataWeNeed.location || "no location found"));
               infowindow.open(map,marker);
             });
             google.maps.event.addListener(marker, 'dblclick', function() {
