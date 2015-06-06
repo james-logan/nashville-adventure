@@ -11,7 +11,7 @@ var globalHistArr;
 var globalBeerArr;
 
 var artIcon = "http://www.lavillita.com/wpimages/icon_art.png";
-var histIcon = "http://tngenweb.org/carter/graphics/tnflag.gif";
+var histIcon = "http://i.imgur.com/re2hZxK.png";
 var beerIcon = "https://cdn1.iconfinder.com/data/icons/Momentum_MatteEntireSet/32/beer.png";
 
 
