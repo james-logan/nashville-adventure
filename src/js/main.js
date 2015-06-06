@@ -10,6 +10,10 @@ var globalArtArr;
 var globalHistArr;
 var globalBeerArr;
 
+var artIcon = "http://www.lavillita.com/wpimages/icon_art.png";
+var histIcon = "http://tngenweb.org/carter/graphics/tnflag.gif";
+var beerIcon = "https://cdn1.iconfinder.com/data/icons/Momentum_MatteEntireSet/32/beer.png";
+
 
 // set up map, put on page
 var center = new google.maps.LatLng(36.1565338,-86.7769905);
@@ -19,40 +23,43 @@ var mapOptions = {
 }
 var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-// // get global art installations data array
-// $.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
-//   globalArtArr = data;
-//   $.each(globalArtArr, function(i, entry) {
-//               var marker = new google.maps.Marker({
-//                   position: new google.maps.LatLng(entry.latitude, entry.longitude),
-//                   map: map,
-//                   title: location.name
-//               });
-//           });
-// });
+// get global art installations data array
+$.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
+  globalArtArr = data;
+  $.each(globalArtArr, function(i, entry) {
+              var marker = new google.maps.Marker({
+                  position: new google.maps.LatLng(entry.latitude, entry.longitude),
+                  map: map,
+                  title: location.name,
+                  icon: artIcon
+              });
+          });
+});
 
-// // get global historical markers data array
-// $.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
-//   globalHistArr = data;
-// });
-
-// // get global beer permit holders data array
-// $.get(`${apiUrl}${beerResourceName}.json?${appToken}`, function(data) {
-//   globalBeerArr = data;
-// });
-
-plotPoints(artResourceName);
-plotPoints(histResourceName);
-plotPoints(beerResourceName, "http://www.nowplayingnashville.com/sites/nowplayingnashville.com/images/org/220173834/yazoo_small.png");
-function plotPoints(resourceName, iconName) {
-  $.get(`${apiUrl}${resourceName}.json?${appToken}`, function(data) {
-    $.each(data, function(i, entry) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(entry.latitude, entry.longitude),
-                    map: map,
-                    title: location.name,
-                    icon: iconName
-                });
+// get global historical markers data array
+$.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
+  globalHistArr = data;
+  $.each(globalHistArr, function(i, entry) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(entry.latitude, entry.longitude),
+                map: map,
+                title: location.name,
+                icon: histIcon
             });
-  });
-}
+        });
+});
+
+// get global beer permit holders data array
+$.get(`${apiUrl}${beerResourceName}.json?${appToken}`, function(data) {
+  globalBeerArr = data;
+  console.log(globalBeerArr);
+  $.each(globalBeerArr, function(i, entry) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(entry.latitude, entry.longitude),
+                map: map,
+                title: location.name,
+                icon: beerIcon
+            });
+        });
+});
+
