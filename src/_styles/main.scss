@@ -43,7 +43,7 @@ h1 {
   color: red;
 }
 
-.crawls {
+.crawls.hidden {
   position: absolute;
   bottom: 15%;
   right: 60px;
@@ -59,3 +59,19 @@ h1 {
   background: burlywood;
   height: 615px;
 }
+
+.crawlCreateDiv {
+  position: absolute;
+  bottom: 60px;
+  left: 15px;
+  border: 2px solid #777;
+  input {
+  height: 25px;
+  }
+}
+
+.crawlCreateButton {
+  margin-left: -5px;
+}
+
+
