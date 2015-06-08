@@ -60,73 +60,72 @@ var infowindow = new google.maps.InfoWindow({
 });
 
 // get global art installations data array
-$.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
-  globalArtArr = data;
-  $.each(globalArtArr, function(i, entry) {
-              var marker = new google.maps.Marker({
-                  position: new google.maps.LatLng(entry.latitude, entry.longitude),
-                  map: map,
-                  title: location.name,
-                  icon: artIcon
-              });
-              marker.dataWeNeed = entry;
-              google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(marker.dataWeNeed.description || "no description found");
-                infowindow.open(map,marker);
+// $.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
+//   globalArtArr = data;
+//   $.each(globalArtArr, function(i, entry) {
+//               var marker = new google.maps.Marker({
+//                   position: new google.maps.LatLng(entry.latitude, entry.longitude),
+//                   map: map,
+//                   title: location.name,
+//                   icon: artIcon
+//               });
+//               marker.dataWeNeed = entry;
+//               google.maps.event.addListener(marker, 'click', function() {
+//                 infowindow.setContent(marker.dataWeNeed.description || "no description found");
+//                 infowindow.open(map,marker);
+//                 });
 
+//               google.maps.event.addListener(marker, 'dblclick', function() {
+//                      console.log('dog-console')
+//                      var latlong = "";
+//                      latlong += marker.dataWeNeed.latitude;
+//                      latlong += ',' + marker.dataWeNeed.longitude;
+//                      var singleWayPt = {};
+//                      singleWayPt.location = latlong;
+//                      singleWayPt.stopover = true;
+//                      waypts.push(singleWayPt);
+//                      if (waypts.length === 3) {
+//                        routeMaker();
+//                      }
 
-              google.maps.event.addListener(marker, 'dblclick', function() {
-              var latlong = "";
-              latlong += marker.dataWeNeed.latitude;
-              latlong += ',' + marker.dataWeNeed.longitude;
-              var singleWayPt = {};
-              singleWayPt.location = latlong;
-              singleWayPt.stopover = true;
-              waypts.push(singleWayPt);
-              console.log(latlong);
-              console.log(singleWayPt);
-              if (waypts.length === 3) {
-                routeMaker();
-              }
-              });
-
-              });
-          });
-});
+//               });
+//           });
+// });
 
 // get global historical markers data array
-$.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
-  globalHistArr = data;
-  $.each(globalHistArr, function(i, entry) {
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(entry.latitude, entry.longitude),
-                map: map,
-                title: location.name,
-                icon: histIcon
-            });
-            marker.dataWeNeed = entry;
-            google.maps.event.addListener(marker, 'click', function() {
-              infowindow.setContent(marker.dataWeNeed.marker_text || "no description found");
-              infowindow.open(map,marker);
+// $.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
+//   globalHistArr = data;
+//   $.each(globalHistArr, function(i, entry) {
+//             var marker = new google.maps.Marker({
+//                 position: new google.maps.LatLng(entry.latitude, entry.longitude),
+//                 map: map,
+//                 title: location.name,
+//                 icon: histIcon
+//             });
+//             marker.dataWeNeed = entry;
+//             google.maps.event.addListener(marker, 'click', function() {
+//               infowindow.setContent(marker.dataWeNeed.marker_text || "no description found");
+//               infowindow.open(map,marker);
+//               });
 
-            google.maps.event.addListener(marker, 'dblclick', function() {
-              var latlong = "";
-              latlong += marker.dataWeNeed.latitude;
-              latlong += ',' + marker.dataWeNeed.longitude;
-              var singleWayPt = {};
-              singleWayPt.location = latlong;
-              singleWayPt.stopover = true;
-              waypts.push(singleWayPt);
-              console.log(latlong);
-              console.log(singleWayPt);
-              if (waypts.length === 3) {
-                routeMaker();
-              }
-              });
+//             google.maps.event.addListener(marker, 'dblclick', function() {
+//               console.log('dog-food');
+//               var latlong = "";
+//               latlong += marker.dataWeNeed.latitude;
+//               latlong += ',' + marker.dataWeNeed.longitude;
+//               var singleWayPt = {};
+//               singleWayPt.location = latlong;
+//               singleWayPt.stopover = true;
+//               waypts.push(singleWayPt);
+//               console.log(latlong);
+//               console.log(singleWayPt);
+//               if (waypts.length === 3) {
+//                 routeMaker();
+//               }
 
-            });
-        });
-});
+//             });
+//         });
+// });
 
 // get global beer permit holders data array
 // $.get(`${apiUrl}${beerResourceName}.json?${appToken}`, function(data) {
@@ -148,28 +147,28 @@ $.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
 
 // grabbing the trail as user is clicking waypoints, the data for each waypoint will be added to the trail array
 
-var trailArray = [];
+// var trailArray = [];
 
-window.onload = function () {
-     getTrails();
-}
-
-
-function getTrails () {
-     $.get("https://nashville-adventure.firebaseio.com/trails", function (data) {
-          $(data).each(function (item) {
-               $('trail-list-div').append("<div class='trail-box'>"+item[0]+"</div>");
-          })
-     })
-}
+// window.onload = function () {
+//      getTrails();
+// }
 
 
-function postTrail () {
-     $.post('https://nashville-adventure.firebaseio.com/trails', trailArray, function (data) {
-          //trail name div needs to be replaced with noah's
-          $('trail-name-div').text(trailArray[0]);
-     });
-}
+// function getTrails () {
+//      $.get("https://nashville-adventure.firebaseio.com/trails", function (data) {
+//           $(data).each(function (item) {
+//                $('trail-list-div').append("<div class='trail-box'>"+item[0]+"</div>");
+//           })
+//      })
+// }
+
+
+// function postTrail () {
+//      $.post('https://nashville-adventure.firebaseio.com/trails', trailArray, function (data) {
+//           //trail name div needs to be replaced with noah's
+//           $('trail-name-div').text(trailArray[0]);
+//      });
+// }
 
 //************ matt's code
 
@@ -189,15 +188,15 @@ function postTrail () {
 
 //********************************** JOHN'S CODE
 
-// set up map, put on page
-var center = new google.maps.LatLng(36.1565338,-86.7769905);
-var mapOptions = {
-  zoom: 14,
-  center: center
-}
-var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+// // set up map, put on page
+// var center = new google.maps.LatLng(36.1565338,-86.7769905);
+// var mapOptions = {
+//   zoom: 14,
+//   center: center
+// }
+// var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-var infowindow = new google.maps.InfoWindow();
+// var infowindow = new google.maps.InfoWindow();
 
 // get global art installations data array
 $.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
@@ -223,6 +222,20 @@ $.get(`${apiUrl}${artResourceName}.json?${appToken}`, function(data) {
                   (marker.dataWeNeed.location || "no location found") + "</div>");
 
                 infowindow.open(map,marker);
+              });
+              google.maps.event.addListener(marker, 'dblclick', function() {
+                     console.log('dog-console')
+                     var latlong = "";
+                     latlong += marker.dataWeNeed.latitude;
+                     latlong += ',' + marker.dataWeNeed.longitude;
+                     var singleWayPt = {};
+                     singleWayPt.location = latlong;
+                     singleWayPt.stopover = true;
+                     waypts.push(singleWayPt);
+                     if (waypts.length === 3) {
+                       routeMaker();
+                     }
+
               });
               // google.maps.event.addListener(marker, 'dblclick', function() {
               //   console.log('double-click');
@@ -252,6 +265,22 @@ $.get(`${apiUrl}${histResourceName}.json?${appToken}`, function(data) {
             // google.maps.event.addListener(marker, 'dblclick', function() {
             //   console.log('double-click');
             // });
+            google.maps.event.addListener(marker, 'dblclick', function() {
+              console.log('dog-food');
+              var latlong = "";
+              latlong += marker.dataWeNeed.latitude;
+              latlong += ',' + marker.dataWeNeed.longitude;
+              var singleWayPt = {};
+              singleWayPt.location = latlong;
+              singleWayPt.stopover = true;
+              waypts.push(singleWayPt);
+              console.log(latlong);
+              console.log(singleWayPt);
+              if (waypts.length === 3) {
+                routeMaker();
+              }
+
+            });
         });
 });
 
